@@ -7,10 +7,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	tmp1 = (unsigned char *)src;
 	tmp2 = (unsigned char *)dst;
-	while (n > 0)
-	{
-		*tmp2++ = *tmp1++;
-		n--;
-	}
+    while (n > 0 && (tmp1 || tmp2))
+    {
+        *tmp2++ = *tmp1++;
+        n--;
+    }
 	return (dst);
 }
