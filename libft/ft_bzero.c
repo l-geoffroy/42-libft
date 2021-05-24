@@ -1,16 +1,17 @@
 #include "libft.h"
 
-void ft_bzero(void *s, size_t n)
+void		ft_bzero(void *s, size_t n)
 {
-    int i;
-    void *tmp;
+	size_t		i;
+	char		*str;
 
-    i = 0;
-    tmp = s;
-    while (i < (int)n)
-    {
-        (*(char *)tmp++) = '\0';
-        i++;
-    }
-    return;
+	if (n == 0)
+		return ;
+	str = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = 0;
+		i++;
+	}
 }

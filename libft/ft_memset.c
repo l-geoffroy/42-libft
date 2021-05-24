@@ -1,16 +1,15 @@
 #include "libft.h"
 
-void *ft_memset(void *b, int c, size_t len)
+/*
+**  Writes len bytes of value c (converted to an unsigned char) to the string b.
+*/
+
+void		*ft_memset(void *b, int c, size_t len)
 {
-	int i;
-	void *tmp;
+	size_t	i;
 
 	i = 0;
-	tmp = b;
-	while (i < (int)len)
-	{
-		(*(char *)tmp++) = (unsigned char)c;
-		i++;
-	}
+	while (i < len)
+		((unsigned char *)b)[i++] = (unsigned char)c;
 	return (b);
 }

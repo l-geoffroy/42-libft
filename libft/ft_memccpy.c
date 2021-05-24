@@ -1,19 +1,23 @@
 #include "libft.h"
 
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+/*
+** Copies bytes from string src to string dst.
+** If c occurs in the string src, the copy stops and a pointer to the byte
+** after the copy of c in the string dst is returned.
+** Otherwise, n bytes are copied, and a NULL pointer is returned.
+** The src and dst strings should not overlap, as the behavior is undefined.
+*/
+
+void		*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	unsigned int	i;
-	unsigned char	*uc_dst;
-	unsigned char	*uc_src;
+	size_t	i;
 
 	i = 0;
-	uc_dst = (unsigned char *)dst;
-	uc_src = (unsigned char *)src;
 	while (i < n)
 	{
-		uc_dst[i] = uc_src[i];
-		if (uc_src[i] == (unsigned char)c)
-			return ((void *)&uc_dst[i + 1]);
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		if (((unsigned char *)src)[i] == (unsigned char)c)
+			return (dst + i + 1);
 		i++;
 	}
 	return (NULL);
