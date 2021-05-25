@@ -1,21 +1,32 @@
-{
-	int i;
-	int	minus;
-	int	num;
+#import "libft.h"
 
-	i = 0;
-	minus = 1;
-	num = 0;
-	while (ft_isspace_atoi(str[i]))
-		i = i + 1;
-	if (str[i] == '-')
-		minus = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i = i + 1;
-	while (ft_isdigit(str[i]))
+static int	my_isspace(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\r')
+		return (1);
+	else if (c == '\f' || c == '\v' || c == ' ')
+		return (1);
+	else
+		return (0);
+}
+
+int			ft_atoi(const char *str)
+{
+	int res;
+	int negative;
+
+	negative = 1;
+	res = 0;
+	while (my_isspace(*str))
+		str++;
+	if (*str == '-')
 	{
-		num = num * 10 + str[i] - '0';
-		i = i + 1;
+		negative = -1;
+		str++;
 	}
-	return (num * minus);
+	else if (*str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
+		res = (res * 10) + (*str++ - 48);
+	return (negative * res);
 }

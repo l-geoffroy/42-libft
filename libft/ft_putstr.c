@@ -1,12 +1,13 @@
 #include "libft.h"
 
-/*
-** Puts str to 1 fd
-*/
-
-void	ft_putstr(const char *s)
+void	ft_putstr(char const *s)
 {
-	if (!s)
-		return ;
-	write(1, s, ft_strlen(s));
+	if (s)
+	{
+		while (*s != 0)
+		{
+			write(1, s, 1);
+			s++;
+		}
+	}
 }

@@ -1,25 +1,30 @@
 #include "libft.h"
 
-/*
-** Allocates copy of s1 with removed chars
-** specified in set from the start and the end of the string
-*/
-
-char		*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s)
 {
-	size_t	i;
-	size_t	len;
-	char	*str;
+	int				beg;
+	int				end;
+	char			*string;
+	char			*out;
 
-	if (!s1 || !set)
+	if (s == NULL)
 		return (NULL);
-	i = 0;
-	while (s1[i] != '\0' && ft_strchr(set, s1[i]))
-		i++;
-	len = ft_strlen(s1 + i);
-	while (ft_strchr(set, s1[i + len]))
-		len--;
-	if (!(str = ft_substr(s1, i, len + 1)))
+	beg = 0;
+	end = ft_strlen(s) - 1;
+	while ((s[beg] == ' ' || s[beg] == '\n' || s[beg] == '\t') && (s[beg] != 0))
+		beg++;
+	while ((s[end] == ' ' || s[end] == '\n' || s[end] == '\t') && (s[end] != 0))
+		end--;
+	if (beg >= end)
+		return (ft_strdup(""));
+	string = ft_strnew(end - beg + 1);
+	if (string)
+	{
+		out = string;
+		while (s[beg] != 0 && beg <= end)
+			*string++ = s[beg++];
+		return (out);
+	}
+	else
 		return (NULL);
-	return (str);
 }

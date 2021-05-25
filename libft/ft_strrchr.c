@@ -1,20 +1,18 @@
 #include "libft.h"
 
-/*
-** Locates the last occurence of c in s
-*/
-
-char		*ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	len;
+	int pos;
 
-	len = ft_strlen(s);
-	if (c == '\0')
-		return ((char *)s + len);
-	while (len--)
+	pos = ft_strlen(s);
+	if (s)
 	{
-		if (s[len] == c)
-			return ((char *)s + len);
+		while (s[pos] != (char)c && pos >= 0)
+			pos--;
+		if (s[pos] == (char)c)
+			return ((char*)&s[pos]);
+		else
+			return (NULL);
 	}
 	return (NULL);
 }

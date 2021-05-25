@@ -1,31 +1,25 @@
 #include "libft.h"
 
-/*
-** Appends string src to the end of dst.
-** NULL terminates dst after concatenation.
-** If NULL terminated returns ft_strlen(dst) + ft_strlen(src).
-** Otherwise returns dstsize + ft_strlen(src).
-*/
-
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+size_t		ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	dst_len;
-	size_t	src_len;
-	size_t	i;
-	size_t	d_len;
+	size_t total;
+	size_t original;
 
-	dst_len = ft_strlen(dst);
-	src_len = ft_strlen(src);
-	d_len = dst_len;
-	i = 0;
-	if (dstsize <= dst_len)
-		return (dstsize + src_len);
-	while (dst_len < dstsize - 1 && src[i])
+	original = size;
+	total = ft_strlen(dst) + ft_strlen(src);
+	while (*dst != 0 && size > 0)
 	{
-		dst[dst_len] = src[i];
-		i++;
-		dst_len++;
+		dst++;
+		size--;
 	}
-	dst[dst_len] = 0;
-	return (d_len + src_len);
+	if (size == 0)
+		return (ft_strlen(src) + original);
+	while (*src != 0 && size > 1)
+	{
+		*dst++ = *src++;
+		size--;
+	}
+	*dst = 0;
+	return (total);
+	return (0);
 }

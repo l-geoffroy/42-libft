@@ -1,35 +1,27 @@
 #include "libft.h"
 
-/*
-** Iters lst and applies f to the content of each elem.
-** Creates a new list resulting of the successive applications of f.
-** Del is used to delete the content of an element if needed.
-*/
-
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list		*new;
-	t_list		*head;
-	t_list		*tail;
+	t_list *temp;
+	t_list *new;
+	t_list *start;
 
-	if (!lst || !f || !del)
+	if (!lst || !f)
 		return (NULL);
-	head = NULL;
-	if (!(new = ft_lstnew(f(lst->content))))
+	temp = f(lst);
+	new = ft_lstnew(temp->content, temp->content_size);
+	if (!new)
 		return (NULL);
-	ft_lstadd_back(&head, new);
-	tail = head;
 	lst = lst->next;
+	start = new;
 	while (lst)
 	{
-		if (!(new = ft_lstnew(f(lst->content))))
-		{
-			ft_lstclear(&head, del);
+		temp = f(lst);
+		new->next = ft_lstnew(temp->content, temp->content_size);
+		if (!new->next)
 			return (NULL);
-		}
-		ft_lstadd_back(&tail, new);
-		tail = tail->next;
 		lst = lst->next;
+		new = new->next;
 	}
-	return (head);
+	return (start);
 }

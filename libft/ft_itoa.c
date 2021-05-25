@@ -1,52 +1,47 @@
 #include "libft.h"
 
-static int		ft_intlen_with_minus(int num)
+static int		itoa_length(int n)
 {
-	int		numlen;
+	int len;
 
-	numlen = 0;
-	if (num == 0)
+	len = 0;
+	if (n < 0)
+		len++;
+	if (n == 0)
+		len = 1;
+	while (n)
 	{
-		numlen = 1;
+		len++;
+		n = n / 10;
 	}
-	if (num < 0)
-	{
-		numlen++;
-		num = -1 * num;
-	}
-	while (num != 0)
-	{
-		num = num / 10;
-		numlen++;
-	}
-	return (numlen);
+	return (len);
 }
 
 char			*ft_itoa(int n)
 {
-	int		nlen;
-	char	*s;
-	long	num;
+	char	*str;
+	int		len;
 
-	nlen = 0;
-	num = (long)n;
-	nlen = ft_intlen_with_minus(n);
-	if (!(s = malloc(nlen + 1)))
+	len = itoa_length(n);
+	str = ft_strnew(len);
+	if (str == NULL)
 		return (NULL);
-	s[nlen] = '\0';
-	if (num == 0)
-		s[0] = '0';
-	if (num < 0)
+	if (n == 0)
+		str[0] = '0';
+	if (n < 0)
 	{
-		s[0] = '-';
-		num = -num;
+		str[0] = '-';
+		if (n == -2147483648)
+		{
+			str[len-- - 1] = '8';
+			n = n / 10;
+		}
+		n = -n;
 	}
-	nlen--;
-	while (nlen >= 0 && num != 0)
+	while (n != 0 && len >= 0)
 	{
-		s[nlen] = num % 10 + '0';
-		num = num / 10;
-		nlen--;
+		str[len-- - 1] = n % 10 + 48;
+		n = n / 10;
 	}
-	return (s);
+	return (str);
 }

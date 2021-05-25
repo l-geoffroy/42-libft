@@ -1,17 +1,13 @@
 #include "libft.h"
 
-/*
-** Iterates the list ’lst’ and applies the function
-** ’f’ to the content of each element.
-*/
-
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
-	if (!lst || !f)
-		return ;
-	while (lst)
+	if (lst && f)
 	{
-		f(lst->content);
-		lst = lst->next;
+		f(lst);
+		if ((lst)->next)
+		{
+			ft_lstiter((lst)->next, f);
+		}
 	}
 }

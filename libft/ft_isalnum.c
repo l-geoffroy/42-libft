@@ -1,10 +1,11 @@
-#include "libft.h"
-
-/*
-** Tests for any character for which isalpha() or isdigit() is true.
-*/
-
-int		ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
-	return (ft_isalpha(c) || ft_isdigit(c));
+	if (c > 64 && c < 91)
+		return (1);
+	else if (c > 96 && c < 123)
+		return (1);
+	else if (c > 47 && c < 58)
+		return (1);
+	else
+		return (0);
 }

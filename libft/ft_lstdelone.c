@@ -1,15 +1,8 @@
 #include "libft.h"
 
-/*
-** Takes as a parameter an elem and frees the memory of the elem’s content
-** using the function ’del’ given as a parameter and free the elem.
-** The memory of ’next’ must not be freed.
-*/
-
-void	ft_lstdelone(t_list *lst, void (*del)(void*))
+void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
 {
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
+	del((*alst)->content, (*alst)->content_size);
+	free(*alst);
+	*alst = NULL;
 }
