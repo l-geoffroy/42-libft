@@ -1,16 +1,19 @@
 #include "libft.h"
 
-char	*ft_strncat(char *s1, const char *s2, size_t n)
+char		*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	char *original;
+	size_t	i;
+	size_t	j;
 
-	original = s1;
-	s1 = &s1[ft_strlen(s1)];
-	while (*s2 != 0 && n > 0)
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+		i++;
+	while (s2[j] != '\0' && j < n)
 	{
-		*s1++ = *s2++;
-		n--;
+		s1[i + j] = s2[j];
+		j++;
 	}
-	*s1 = 0;
-	return (original);
+	s1[i + j] = '\0';
+	return (s1);
 }

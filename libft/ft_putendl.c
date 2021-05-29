@@ -1,17 +1,13 @@
 #include "libft.h"
 
-void	ft_putendl(char const *s)
-{
-	char endline;
+/*This function will display the string s on the standard output followed by a
+ *'\n', which is a new line. We do this by using our ft_putstr and ft_putchar 
+ * functions that we previously made. We use our ft_putstr on our string s to
+ * display it on the standard output. Then we use our ft_putchar to have our
+ * string followed by a new line.*/
 
-	if (s)
-	{
-		endline = '\n';
-		while (*s != 0)
-		{
-			write(1, s, 1);
-			s++;
-		}
-		write(1, &endline, 1);
-	}
+void		ft_putendl(char const *s)
+{
+	ft_putstr(s);
+	ft_putchar('\n');
 }
