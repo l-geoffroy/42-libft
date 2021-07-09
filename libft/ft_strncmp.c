@@ -1,15 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgeoffro <lgeoffro@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/28 13:53:30 by lgeoffro          #+#    #+#             */
+/*   Updated: 2021/07/09 15:17:01 by lgeoffro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int			ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	/*We first declare our counter variable i as a size_t. We do this because
-	 * the parameter we are taking in for n is a size_t. We will be needing
-	 * to compare our give n value with our i value so they must be the same.*/
-	size_t	i;
+	unsigned int	res;
+	unsigned int	i;
+
 	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] != '\0' && s1[i] == s2[i] && i < n - 1)
+	res = 0;
+	while (i < n)
+	{
+		if (s1[i] != s2[i])
+		{
+			res = (unsigned char)s1[i] - (unsigned char)s2[i];
+			break ;
+		}
+		if (s1[i] == '\0' || s2[i] == '\0')
+			break ;
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	return (res);
 }
